@@ -29,6 +29,11 @@ import freemarker.template.Template;
 import freemarker.template.TemplateException;
 import freemarker.template.TemplateNotFoundException;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import com.ixxus.preflight.Model.File;
+
 /**
  * 
  * It represents Controller to create a report with html and pdf format
@@ -51,13 +56,18 @@ public class FreeMarketCustomController {
      */
     @RequestMapping(value = "/")
     public ModelAndView generateHTMLPage(ModelAndView mv) {
-
+    	
+    	List<File> newlist = new ArrayList<File>();
+    	newlist.add(new File("Document 1", "Incorrect"));
+    	newlist.add(new File("Document 2", "Correct"));
+    	newlist.add(new File("Document 3", "Incorrect"));
+    	newlist.add(new File("Document 4", "Correct"));
+    	
         // TODO Change this code to service code 
-        mv.addObject("blogTitle", "Freemarker Template Demo using Spring by Tacho");
-        mv.addObject("message", "Getting started with Freemarker.<br/>Find a Freemarker template demo using Spring.");
+        mv.addObject("files", newlist);
 
         // TODO Configurable
-        mv.setViewName("tacho-template");
+        mv.setViewName("listfiles");
         return mv;
     }
 
