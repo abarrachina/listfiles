@@ -56,7 +56,7 @@ public class AppConfiguration extends WebMvcConfigurerAdapter {
         PdfReport report = new PdfReport();
         
         // TODO change
-        report.setTemplatePath("templates/pdf-test-template.ftl");
+        report.setTemplatePath("pdf-test-template.ftl");
         return report;
     }
 

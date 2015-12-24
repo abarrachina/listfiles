@@ -34,27 +34,40 @@ public class PdfReport implements Report {
     public void create(Map<String, String> data, OutputStream outputStream) {
 
         Configuration cfg = new Configuration(Configuration.VERSION_2_3_22);
+        cfg.setClassForTemplateLoading(PdfReport.class, "../../../../templates");
 
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        Writer out = null;
+        InputStream is = null;
         try {
             Template template = cfg.getTemplate(templatePath);
 
-            // TODO Surround in try / catch
-
-            Writer out = new OutputStreamWriter(baos);
+            out = new OutputStreamWriter(baos);
             template.process(data, out);
             out.flush();
 
-            // TODO Surround in try / catch
-            InputStream is = new ByteArrayInputStream(baos.toByteArray());
+            is = new ByteArrayInputStream(baos.toByteArray());
             convert(is, outputStream);
+            is.close();
 
-            outputStream.flush();
-            outputStream.close();
         } catch (Exception e) {
+            throw new ReportException(e);
+        } finally {
+            if (out != null) {
+                try {
+                    out.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
 
-            // TODO Control this
-            e.printStackTrace();
+            if (is != null) {
+                try {
+                    is.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
         }
 
     }
