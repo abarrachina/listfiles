@@ -31,8 +31,9 @@ public class AppConfiguration extends WebMvcConfigurerAdapter {
 
     @Bean(name = "freemarkerConfig")
     public FreeMarkerConfigurer freemarkerConfig() {
-        
-        FreeMarkerConfigurer configurer = new FreeMarkerConfigurer();       
+        FreeMarkerConfigurer configurer = new FreeMarkerConfigurer();
+        configurer.setTemplateLoaderPath("/WEB-INF/views/");
+        configurer.setDefaultEncoding("UTF-8");
         Map<String, Object> map = new HashMap<>();
         map.put("xml_escape", new XmlEscape());
         configurer.setFreemarkerVariables(map);
@@ -53,7 +54,9 @@ public class AppConfiguration extends WebMvcConfigurerAdapter {
     @Bean(name = "finalPdfReport")
     public PdfReport configPdfReport() {
         PdfReport report = new PdfReport();
-        report.setTemplatePath("templates/test-template.ftl");
+        
+        // TODO change
+        report.setTemplatePath("templates/pdf-test-template.ftl");
         return report;
     }
 

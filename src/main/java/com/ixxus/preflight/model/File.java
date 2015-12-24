@@ -1,4 +1,4 @@
-package com.ixxus.preflight.Model;
+package com.ixxus.preflight.model;
 
 //TODO: Auto-generated Javadoc
 /**

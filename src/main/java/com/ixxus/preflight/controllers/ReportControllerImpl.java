@@ -28,7 +28,7 @@ public class ReportControllerImpl implements ReportController {
     @Autowired
     private ReportService reportService;
 
-    @Value("templates/test-template")
+    @Value("test-template")
     private String generateHTMLPageTemplate;
 
     /**
