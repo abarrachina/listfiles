@@ -2,7 +2,9 @@ package com.ixxus.preflight.controllers;
 
 import java.io.IOException;
 import java.io.OutputStream;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletResponse;
@@ -13,6 +15,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.ixxus.preflight.model.File;
 import com.ixxus.preflight.services.ReportService;
 
 /**
@@ -40,12 +43,17 @@ public class ReportControllerImpl implements ReportController {
     @RequestMapping(value = "/")
     public ModelAndView generateHTMLPage(ModelAndView mv) {
 
-        Map<String, String> options = new HashMap<>();
-        Map<String, String> results = reportService.getResults(options);
+    	List<File> newlist = new ArrayList<File>();
+    	newlist.add(new File("Document 1", "Incorrect"));
+    	newlist.add(new File("Document 2", "Correct"));
+    	newlist.add(new File("Document 3", "Uncompleted"));
+    	newlist.add(new File("Document 4", "Correct"));
+    	
+        // TODO Change this code to service code 
+        mv.addObject("files", newlist);
 
-        results.forEach((key, value) -> mv.addObject(key, value));
-
-        mv.setViewName(generateHTMLPageTemplate);
+        // TODO Configurable
+        mv.setViewName("listfiles");
         return mv;
     }
 
