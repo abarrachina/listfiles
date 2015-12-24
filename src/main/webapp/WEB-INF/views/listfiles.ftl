@@ -41,6 +41,8 @@ tr:nth-child(even) {background-color: #f2f2f2}
     </tr>
     </#list>
   </table>
+  
+  <a href="/pdf" class="link">Reporter</a>
  
 </div>  
 </body>
