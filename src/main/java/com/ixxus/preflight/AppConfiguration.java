@@ -13,6 +13,8 @@ import org.springframework.web.servlet.config.annotation.ViewResolverRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer;
 
+import com.ixxus.preflight.services.PdfReport;
+
 import freemarker.template.utility.XmlEscape;
 
 /**
@@ -29,8 +31,8 @@ public class AppConfiguration extends WebMvcConfigurerAdapter {
 
     @Bean(name = "freemarkerConfig")
     public FreeMarkerConfigurer freemarkerConfig() {
-        FreeMarkerConfigurer configurer = new FreeMarkerConfigurer();
-        configurer.setTemplateLoaderPath("/WEB-INF/views/");
+        
+        FreeMarkerConfigurer configurer = new FreeMarkerConfigurer();       
         Map<String, Object> map = new HashMap<>();
         map.put("xml_escape", new XmlEscape());
         configurer.setFreemarkerVariables(map);
@@ -46,6 +48,13 @@ public class AppConfiguration extends WebMvcConfigurerAdapter {
     @Override
     public void configureViewResolvers(ViewResolverRegistry registry) {
         registry.freeMarker();
+    }
+
+    @Bean(name = "finalPdfReport")
+    public PdfReport configPdfReport() {
+        PdfReport report = new PdfReport();
+        report.setTemplatePath("templates/test-template.ftl");
+        return report;
     }
 
 }
