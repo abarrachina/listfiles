@@ -1,5 +1,36 @@
 <html>
-	<head><title>List Files</title></head>
+	<head>
+		<title>List Files</title>
+		<style>
+			table {
+			    border-collapse: collapse;
+			}
+			
+			table, th, td {
+			    border: 1px solid black;
+			}
+			
+			table {
+			    width: 100%;
+			}
+			
+			th {
+			    height: 50px;
+			}
+			
+			th {
+			    background-color: #4CAF50;
+			    color: white;
+			}
+			
+			th, td {
+			    padding: 15px;
+			    text-align: left;
+			}
+			
+			tr:nth-child(even) {background-color: #f2f2f2}
+	</style>
+	</head>
 	<body>
 		<div id="content">
 		  <table class="datatable">
