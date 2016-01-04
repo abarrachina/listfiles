@@ -1,4 +1,4 @@
-package com.ixxus.preflight.repositories;
+package com.ixxus.preflight.repositories.test;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -7,6 +7,7 @@ import java.util.Map;
 import org.springframework.stereotype.Repository;
 
 import com.ixxus.preflight.model.File;
+import com.ixxus.preflight.repositories.ReportDAO;
 
 @Repository
 public class DummyReportDAO implements ReportDAO {
