@@ -1,4 +1,5 @@
 <html>
+	<head><title>List Files</title></head>
 	<body>
 		<div id="content">
 		  <table class="datatable">
