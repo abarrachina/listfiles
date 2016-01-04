@@ -6,21 +6,21 @@ import java.util.Map;
 
 import org.springframework.stereotype.Repository;
 
-import com.ixxus.preflight.model.File;
+import com.ixxus.preflight.model.FileResult;
 import com.ixxus.preflight.repositories.ReportDAO;
 
 @Repository
 public class DummyReportDAO implements ReportDAO {
 
     @Override
-    public List<File> getResults(Map<String, String> options) {
+    public List<FileResult> getResults(Map<String, String> options) {
         // TODO Auto-generated method stub
 
-    	List<File> newlist = new ArrayList<File>();
-    	newlist.add(new File("Document 1", "Incorrect"));
-    	newlist.add(new File("Document 2", "Correct"));
-    	newlist.add(new File("Document 3", "Uncompleted"));
-    	newlist.add(new File("Document 4", "Correct"));
+    	List<FileResult> newlist = new ArrayList<FileResult>();
+    	newlist.add(new FileResult("Document 1", "Incorrect"));
+    	newlist.add(new FileResult("Document 2", "Correct"));
+    	newlist.add(new FileResult("Document 3", "Uncompleted"));
+    	newlist.add(new FileResult("Document 4", "Correct"));
     	
         return newlist;
     }

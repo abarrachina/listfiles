@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
-import com.ixxus.preflight.model.File;
+import com.ixxus.preflight.model.FileResult;
 import com.ixxus.preflight.repositories.ReportDAO;
 
 @Service
@@ -18,18 +18,18 @@ public class ListReportServiceImpl implements ListReportService {
     private ReportFactory reportFactory;
 
     @Autowired
-    @Qualifier ("dummyReportDAO")
+    @Qualifier ("fileReportDAO")
     private ReportDAO reportDAO;
 
     @Override
-    public List<File> getResults(Map<String, String> options) {
+    public List<FileResult> getResults(Map<String, String> options) {
         return reportDAO.getResults(options);
     }
 
     @Override
     public void generateReport(String reportName, Map<String, String> options, OutputStream outputStream) {
 
-        List<File> data = reportDAO.getResults(options);
+        List<FileResult> data = reportDAO.getResults(options);
         Report report = reportFactory.getInstance(reportName);
         report.create(data, outputStream);
     }

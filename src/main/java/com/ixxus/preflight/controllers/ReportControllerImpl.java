@@ -12,9 +12,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.ixxus.preflight.model.File;
+import com.ixxus.preflight.model.FileResult;
 import com.ixxus.preflight.services.ListReportService;
 
 /**
@@ -43,22 +44,25 @@ public class ReportControllerImpl implements ReportController {
      * @return
      */
     @RequestMapping(value = "/")
-    public ModelAndView generateHTMLPage(ModelAndView mv) {
+    public ModelAndView generateHTMLPage(@RequestParam String folderPath, ModelAndView mv) {
 
     	Map<String,String> options = new HashMap<>();
-    	List<File> newlist = reportService.getResults(options);
+    	options.put("path", folderPath);
+    	List<FileResult> newlist = reportService.getResults(options);
     	
-        mv.addObject("files", newlist);
-
+    	mv.addObject("files", newlist);
+        mv.addObject("folderPath", "/pdf?folderPath="+folderPath);
+        
         mv.setViewName("listfiles");
+        
         return mv;
     }
 
     @RequestMapping(value = "/pdf")
-    public void generatePDFPage(HttpServletResponse response) {
+    public void generatePDFPage(@RequestParam String folderPath,HttpServletResponse response) {
 
         Map<String, String> options = new HashMap<>();
-        
+        options.put("path", folderPath);
            	        
         OutputStream os = null;
         try {

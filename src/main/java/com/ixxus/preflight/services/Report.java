@@ -3,7 +3,7 @@ package com.ixxus.preflight.services;
 import java.io.OutputStream;
 import java.util.List;
 
-import com.ixxus.preflight.model.File;
+import com.ixxus.preflight.model.FileResult;
 
 /**
  * Represents a kind of report
@@ -19,6 +19,6 @@ public interface Report {
      * @param data
      * @param outputStream
      */
-    public void create(List<File> data, OutputStream outputStream);
+    public void create(List<FileResult> data, OutputStream outputStream);
 
 }

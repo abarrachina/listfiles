@@ -3,9 +3,9 @@ package com.ixxus.preflight.repositories;
 import java.util.List;
 import java.util.Map;
 
-import com.ixxus.preflight.model.File;
+import com.ixxus.preflight.model.FileResult;
 
 public interface ReportDAO {
     
-    public List<File> getResults(Map<String, String> options);
+    public List<FileResult> getResults(Map<String, String> options);
 }

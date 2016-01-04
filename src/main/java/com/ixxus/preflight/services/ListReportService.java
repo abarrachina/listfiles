@@ -4,7 +4,7 @@ import java.io.OutputStream;
 import java.util.List;
 import java.util.Map;
 
-import com.ixxus.preflight.model.File;
+import com.ixxus.preflight.model.FileResult;
 
 /**
  * 
@@ -25,6 +25,6 @@ public interface ListReportService {
      */
     public void generateReport(String reportName, Map<String, String> options, OutputStream outputStream);
 
-    public List<File> getResults(Map<String, String> options);
+    public List<FileResult> getResults(Map<String, String> options);
 
 }

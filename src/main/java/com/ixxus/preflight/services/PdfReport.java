@@ -24,7 +24,7 @@ import com.lowagie.text.DocumentException;
 import freemarker.template.Configuration;
 import freemarker.template.Template;
 
-import com.ixxus.preflight.model.File;
+import com.ixxus.preflight.model.FileResult;
 
 public class PdfReport implements Report {
 
@@ -35,7 +35,7 @@ public class PdfReport implements Report {
     }
 
     @Override
-    public void create(List<File> data, OutputStream outputStream) {
+    public void create(List<FileResult> data, OutputStream outputStream) {
 
         Configuration cfg = new Configuration(Configuration.VERSION_2_3_22);
         cfg.setClassForTemplateLoading(PdfReport.class, "../../../../templates");

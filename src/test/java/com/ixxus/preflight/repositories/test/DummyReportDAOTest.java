@@ -13,7 +13,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 
 import com.ixxus.preflight.FreemarkerApplication;
-import com.ixxus.preflight.model.File;
+import com.ixxus.preflight.model.FileResult;
 import com.ixxus.preflight.repositories.ReportDAO;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -32,13 +32,13 @@ public class DummyReportDAOTest {
 
     @Test
     public void getResultsNull() {
-        List<File> results = reportDAO.getResults(null);
+        List<FileResult> results = reportDAO.getResults(null);
         Assert.assertNotNull(results);
     }
 
     @Test
     public void getResultsNewObject() {
-        List<File> results = reportDAO.getResults(new HashMap<>());
+        List<FileResult> results = reportDAO.getResults(new HashMap<>());
         Assert.assertNotNull(results);
     }
 

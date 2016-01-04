@@ -2,10 +2,10 @@ package com.ixxus.preflight.model;
 
 //TODO: Auto-generated Javadoc
 /**
-* The Class File.
+* The Class FileResult.
 * * @author Nazareth Jiménez
 */
-public class File {
+public class FileResult {
 
 	/** The name. */
 	private String name;
@@ -16,7 +16,7 @@ public class File {
 	/**
 	 * Instantiates a new file.
 	 */
-	public File(){
+	public FileResult(){
 		
 	}
 	
@@ -26,7 +26,7 @@ public class File {
 	 * @param name the name
 	 * @param isCorrect the is correct
 	 */
-	public File(String name, String isCorrect) {
+	public FileResult(String name, String isCorrect) {
 		super();
 		this.name = name;
 		this.isCorrect = isCorrect;

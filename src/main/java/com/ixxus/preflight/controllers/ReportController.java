@@ -6,7 +6,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 public interface ReportController {
 
-    public ModelAndView generateHTMLPage(ModelAndView mv);
+    public ModelAndView generateHTMLPage(String path, ModelAndView mv);
 
-    public void generatePDFPage(HttpServletResponse response);
+    public void generatePDFPage(String path, HttpServletResponse response);
 }
