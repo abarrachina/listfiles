@@ -28,7 +28,7 @@ th, td {
 tr:nth-child(even) {background-color: #f2f2f2}
 </style>
 <html>
-<head><title>List Files</title>
+<head><title>List Files</title></head>
 <body>
 <div id="content">
   <table class="datatable">
