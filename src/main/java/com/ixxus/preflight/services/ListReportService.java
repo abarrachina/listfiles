@@ -1,7 +1,10 @@
 package com.ixxus.preflight.services;
 
 import java.io.OutputStream;
+import java.util.List;
 import java.util.Map;
+
+import com.ixxus.preflight.model.File;
 
 /**
  * 
@@ -10,7 +13,7 @@ import java.util.Map;
  * @author Ignacio Carpintero Duran <ignacio.carpintero@ixxus.com>
  *
  */
-public interface ReportService {
+public interface ListReportService {
 
     /**
      * 
@@ -22,6 +25,6 @@ public interface ReportService {
      */
     public void generateReport(String reportName, Map<String, String> options, OutputStream outputStream);
 
-    public Map<String, String> getResults(Map<String, String> options);
+    public List<File> getResults(Map<String, String> options);
 
 }

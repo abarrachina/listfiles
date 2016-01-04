@@ -2,7 +2,6 @@ package com.ixxus.preflight.controllers;
 
 import java.io.IOException;
 import java.io.OutputStream;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -16,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.ixxus.preflight.model.File;
-import com.ixxus.preflight.services.ReportService;
+import com.ixxus.preflight.services.ListReportService;
 
 /**
  * 
@@ -29,10 +28,13 @@ import com.ixxus.preflight.services.ReportService;
 public class ReportControllerImpl implements ReportController {
 
     @Autowired
-    private ReportService reportService;
+    private ListReportService reportService;
 
     @Value("test-template")
     private String generateHTMLPageTemplate;
+    
+    @Value("${reportStrategy}")
+    private String reportStrategy;
 
     /**
      * Method in spring MVC to create web page with the report
@@ -43,16 +45,11 @@ public class ReportControllerImpl implements ReportController {
     @RequestMapping(value = "/")
     public ModelAndView generateHTMLPage(ModelAndView mv) {
 
-    	List<File> newlist = new ArrayList<File>();
-    	newlist.add(new File("Document 1", "Incorrect"));
-    	newlist.add(new File("Document 2", "Correct"));
-    	newlist.add(new File("Document 3", "Uncompleted"));
-    	newlist.add(new File("Document 4", "Correct"));
+    	Map<String,String> options = new HashMap<>();
+    	List<File> newlist = reportService.getResults(options);
     	
-        // TODO Change this code to service code 
         mv.addObject("files", newlist);
 
-        // TODO Configurable
         mv.setViewName("listfiles");
         return mv;
     }
@@ -62,16 +59,17 @@ public class ReportControllerImpl implements ReportController {
 
         Map<String, String> options = new HashMap<>();
         
+           	        
         OutputStream os = null;
         try {
             os = response.getOutputStream();
-            reportService.generateReport("finalPdfReport", options, response.getOutputStream());
+            reportService.generateReport(reportStrategy, options, response.getOutputStream());
             os.flush();
 
         } catch (IOException e) {
             e.printStackTrace();
         } finally {
-            if (os != null) {
+            if (os != null){
                 try {
                     os.close();
                 } catch (IOException e) {

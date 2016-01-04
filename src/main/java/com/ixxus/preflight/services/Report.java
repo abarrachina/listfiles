@@ -1,7 +1,9 @@
 package com.ixxus.preflight.services;
 
 import java.io.OutputStream;
-import java.util.Map;
+import java.util.List;
+
+import com.ixxus.preflight.model.File;
 
 /**
  * Represents a kind of report
@@ -17,6 +19,6 @@ public interface Report {
      * @param data
      * @param outputStream
      */
-    public void create(Map<String, String> data, OutputStream outputStream);
+    public void create(List<File> data, OutputStream outputStream);
 
 }

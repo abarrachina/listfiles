@@ -7,6 +7,8 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.xml.parsers.DocumentBuilder;
@@ -22,6 +24,8 @@ import com.lowagie.text.DocumentException;
 import freemarker.template.Configuration;
 import freemarker.template.Template;
 
+import com.ixxus.preflight.model.File;
+
 public class PdfReport implements Report {
 
     private String templatePath;
@@ -31,7 +35,7 @@ public class PdfReport implements Report {
     }
 
     @Override
-    public void create(Map<String, String> data, OutputStream outputStream) {
+    public void create(List<File> data, OutputStream outputStream) {
 
         Configuration cfg = new Configuration(Configuration.VERSION_2_3_22);
         cfg.setClassForTemplateLoading(PdfReport.class, "../../../../templates");
@@ -43,7 +47,9 @@ public class PdfReport implements Report {
             Template template = cfg.getTemplate(templatePath);
 
             out = new OutputStreamWriter(baos);
-            template.process(data, out);
+            Map<String, Object> listFile = new HashMap<>();
+            listFile.put("files", data);
+            template.process(listFile, out);
             out.flush();
 
             is = new ByteArrayInputStream(baos.toByteArray());

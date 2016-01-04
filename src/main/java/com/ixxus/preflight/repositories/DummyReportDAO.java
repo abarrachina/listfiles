@@ -1,23 +1,28 @@
 package com.ixxus.preflight.repositories;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.stereotype.Repository;
+
+import com.ixxus.preflight.model.File;
 
 @Repository
 public class DummyReportDAO implements ReportDAO {
 
     @Override
-    public Map<String, String> getResults(Map<String, String> options) {
+    public List<File> getResults(Map<String, String> options) {
         // TODO Auto-generated method stub
 
-        HashMap<String, String> results = new HashMap<>();
-
-        results.put("blogTitle", "Freemarker Template Demo using Spring by Tacho");
-        results.put("message", "Getting started with Freemarker.<br/>Find a Freemarker template demo using Spring.");
-
-        return results;
+    	List<File> newlist = new ArrayList<File>();
+    	newlist.add(new File("Document 1", "Incorrect"));
+    	newlist.add(new File("Document 2", "Correct"));
+    	newlist.add(new File("Document 3", "Uncompleted"));
+    	newlist.add(new File("Document 4", "Correct"));
+    	
+        return newlist;
     }
 
 }
