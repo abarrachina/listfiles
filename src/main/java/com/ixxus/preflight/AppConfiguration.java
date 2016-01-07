@@ -9,6 +9,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.http.MediaType;
 import org.springframework.web.servlet.config.annotation.ContentNegotiationConfigurer;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.ViewResolverRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer;
@@ -59,5 +60,16 @@ public class AppConfiguration extends WebMvcConfigurerAdapter {
         report.setTemplatePath("pdf-test-template.ftl");
         return report;
     }
+
+    /* (non-Javadoc)
+     * @see org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter#addResourceHandlers(org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry)
+     */
+    @Override
+    public void addResourceHandlers(ResourceHandlerRegistry registry) {
+        
+        registry.addResourceHandler("/resources/**").addResourceLocations("/resources/");
+    }
+    
+    
 
 }

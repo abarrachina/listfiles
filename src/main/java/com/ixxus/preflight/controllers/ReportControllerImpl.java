@@ -5,6 +5,7 @@ import java.io.OutputStream;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -45,7 +46,6 @@ public class ReportControllerImpl implements ReportController {
      */
     @RequestMapping(value = "/")
     public ModelAndView generateHTMLPage(@RequestParam String folderPath, ModelAndView mv) {
-
     	Map<String,String> options = new HashMap<>();
     	options.put("path", folderPath);
     	List<FileResult> newlist = reportService.getResults(options);
