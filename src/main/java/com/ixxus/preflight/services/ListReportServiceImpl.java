@@ -18,7 +18,7 @@ public class ListReportServiceImpl implements ListReportService {
     private ReportFactory reportFactory;
 
     @Autowired
-    @Qualifier ("dummyReportDAO")
+    @Qualifier ("fileReportDAO")
     private ReportDAO reportDAO;
 
     @Override
