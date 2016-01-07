@@ -14,9 +14,7 @@ import java.util.Optional;
 import javax.swing.filechooser.FileSystemView;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
@@ -29,64 +27,77 @@ import org.springframework.web.servlet.ModelAndView;
 public class ListFilesController {
 
     @RequestMapping("/")
-    public ModelAndView listFiles (ModelAndView mv) {
-        
+    public ModelAndView listFiles (final ModelAndView mv) {
+
         mv.addObject("blogTitle", "Freemarker Template Demo using Spring by Tacho");
-        FileSystemView fsv = FileSystemView.getFileSystemView();
-        File[] roots = fsv.getRoots();
-        for (int i = 0; i < roots.length; i++)
-        {
-          System.out.println("Root: " + roots[i]);
+        final FileSystemView fsv = FileSystemView.getFileSystemView();
+        final File[] roots = fsv.getRoots();
+        for (final File root : roots) {
+            System.out.println("Root: " + root);
         }
-        
+
         System.out.println("Home directory: " + fsv.getHomeDirectory());
 
         System.out.println("File system roots returned by File.listRoots():");
 
-        File[] f = File.listRoots();
-        for (int i = 0; i < f.length; i++)
-        {
-          System.out.println("Drive: " + f[i]);
-          System.out.println("Display name: " + fsv.getSystemDisplayName(f[i]));
-          System.out.println("Is drive: " + fsv.isDrive(f[i]));
-          System.out.println("Is floppy: " + fsv.isFloppyDrive(f[i]));
-          System.out.println("Readable: " + f[i].canRead());
-          System.out.println("Writable: " + f[i].canWrite());
+        final File[] f = File.listRoots();
+        for (final File element : f) {
+            System.out.println("Drive: " + element);
+            System.out.println("Display name: " + fsv.getSystemDisplayName(element));
+            System.out.println("Is drive: " + fsv.isDrive(element));
+            System.out.println("Is floppy: " + fsv.isFloppyDrive(element));
+            System.out.println("Readable: " + element.canRead());
+            System.out.println("Writable: " + element.canWrite());
         }
-        String path = "/Users/antoniobarrachina/";
+        final String path = "/Users/nazareth/";
         mv.addObject("path", path);
         mv.setViewName("index");
         return mv;
     }
-    
-    
+
+
     @RequestMapping(value = "/directories")
-    public @ResponseBody List<String> getDirectories (@RequestParam(name = "path", required = false) Optional<String> path, ModelAndView mv) {
-        
-        File file = new File("/Users/antoniobarrachina/"+path.orElse(""));
-        
-        
-        String[] directories = file.list(new FilenameFilter() {
-            
+    public @ResponseBody List<String> getDirectories (@RequestParam(name = "path", required = false) final Optional<String> path, final ModelAndView mv) {
+
+        final File file = new File(path.orElse(""));
+
+
+        final String[] directories = file.list(new FilenameFilter() {
+
             @Override
-            public boolean accept(File current, String name) {
-              return new File(current, name).isDirectory();
+            public boolean accept(final File current, final String name) {
+                final File f = new File(current, name);
+                final Boolean isDirectory = f.isDirectory();
+                final Boolean isHidden = f.isHidden();
+                return (isDirectory && !isHidden);
             }
-          });
-        
-        List <String> directoryList = new ArrayList<>(Arrays.asList(directories));
+        });
+
+        final List <String> directoryList = new ArrayList<>(Arrays.asList(directories));
         return directoryList;
     }
-    
+
     @RequestMapping(value = "/files")
-    public @ResponseBody List<String> getFiles (@RequestParam(name = "dir", required = false) Optional<String> path, ModelAndView mv) {
-        
-        File file = new File(path.orElse(""));
-        List <String> files = new ArrayList<>(Arrays.asList(file.list()));
-        return files;
+    public @ResponseBody List<String> getFiles (@RequestParam(name = "dir", required = false) final Optional<String> path, final ModelAndView mv) {
+
+        final File file = new File(path.orElse(""));
+
+        final String[] files = file.list(new FilenameFilter() {
+
+            @Override
+            public boolean accept(final File current, final String name) {
+                final File f = new File(current, name);
+                final Boolean isDirectory = f.isDirectory();
+                final Boolean isHidden = f.isHidden();
+                return (!isDirectory && !isHidden);
+            }
+        });
+
+        final List <String> filesList = new ArrayList<>(Arrays.asList(files));
+        return filesList;
     }
-    
-    
-    
+
+
+
 }
 

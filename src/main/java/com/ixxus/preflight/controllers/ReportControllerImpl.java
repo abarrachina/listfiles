@@ -44,7 +44,7 @@ public class ReportControllerImpl implements ReportController {
      * @param mv Spring model and view
      * @return
      */
-    @RequestMapping(value = "/")
+    @RequestMapping(value = "/prueba")
     public ModelAndView generateHTMLPage(@RequestParam String folderPath, ModelAndView mv) {
     	Map<String,String> options = new HashMap<>();
     	options.put("path", folderPath);
